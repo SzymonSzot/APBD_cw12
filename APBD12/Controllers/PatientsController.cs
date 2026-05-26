@@ -1,10 +1,10 @@
+using APBD12.Exceptions;
 using APBD12.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APBD12.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/patients")]
     [ApiController]
     public class PatientsController : ControllerBase
     {
@@ -14,14 +14,13 @@ namespace APBD12.Controllers
         {
             _dbService = dbService;
         }
-
-        [Route("{id}")]
+        
         [HttpGet]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get([FromQuery]string? search = null)
         {
             try
             {
-                var res = await _dbService.GetPatientWithPrescriptions(id);
+                var res = await _dbService.GetPatients(search);
             
                 return Ok(res);
             }
