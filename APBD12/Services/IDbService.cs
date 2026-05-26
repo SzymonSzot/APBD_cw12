@@ -6,4 +6,5 @@ namespace APBD12.Services;
 public interface IDbService
 {
     Task<List<GetPatientsDto.PatientDto>> GetPatients(string? search);
+    Task AssignBed(string pesel, BedAssignDto bedAssign);
 }
